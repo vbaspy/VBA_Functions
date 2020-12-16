@@ -1,0 +1,22 @@
+' consider the return type of the Application.GetSaveAsFilename method.
+'If the user cancels out of the dialog, the method returns a Boolean type with a value of False.
+'If the MultiSelect parameter is False, the method returns a String.
+'If the MultiSelect parameter is True, the method returns an array of String variables.
+'By returning a Variant whose type can be tested, the GetSaveAsFilename can be quite flexible, as shown in the following code:
+
+Dim V As Variant
+Dim N As Long
+Application.GetSaveAsFilename
+V = Application.GetOpenFilename(MultiSelect:=True)
+If IsArray(V) = True Then
+    For N = LBound(V) To UBound(V)
+        Debug.Print "Files selected: (" & CStr(N) & ")"
+        Debug.Print "File: " & CStr(N), V(N)
+    Next N
+Else
+    If V = False Then
+        Debug.Print "No file name selected."
+    Else
+        Debug.Print "One file selected: " & V
+    End If
+End If

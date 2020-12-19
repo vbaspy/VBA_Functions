@@ -1,0 +1,13 @@
+	
+
+Sub LoopAllFilesInFolder()
+
+    Dim Path As String
+    Filename = Dir("C:\" & "\*.xls", vbNormal)
+
+    Do Until Filename = ""
+        Debug.Print Filename
+        Filename = Dir()   ' incremental operator
+    Loop
+
+End Sub
